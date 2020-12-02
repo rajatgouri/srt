@@ -1,0 +1,214 @@
+<% include ../Partials/HeaderRoot  %>
+<% include ../Partials/Header %>
+
+
+
+<div class="wrapper">
+    <% include ./loder %>
+
+    <% include ./alert %>
+
+    <div class="container profile-container">
+        <script>
+            var userId = "<%= user._id  %>";
+            var role = "<%= user.role %>" 
+        </script>
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header text-dark bg-primary">
+                        <h4 class="modal-title">Edit Profile</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <% if (user.role === 'Carrier') { %>
+                            <form id="carrier-profile-form">
+                                <div class="row">
+                                <% include ../Forms/carrier-form %>
+
+                                </div>
+
+                                <button type="submit" class="btn btn-primary mt-3 mb-3 signup-button" value="button" >Update</button>
+
+                            </form>
+                        <% } else if (user.role === 'Shipper') { %>
+                            <form id="update-shipper-form">
+                                <% include ../Forms/shipper-form %>
+                                <button type="submit" class="btn btn-primary mt-3 mb-3 signup-button" value="button" >Update</button>
+                            </form>
+                        <%  } %>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary text-dark" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card mt-2 mb-2 ">
+            <div class="card-body p-0">
+                <div class="row p-2">
+                    <div class="col-md-3">
+                        <div class="card ">
+                            <div class="card-body">
+                                <ul class="nav sidebar nav-tabs flex-column w-100 "  >
+                                    <li class="nav-item">
+                                      <a class="nav-link "  href="/user-profile/">Profile</a>
+                                    </li>
+                                    <% if (user.role === 'Carrier') { %>
+                                        <li class="nav-item">
+                                        <a class="nav-link"  href="/user-fleet">Fleets</a>
+                                        </li>
+                                    <% } %>
+                                    
+                                    <li class="nav-item">
+                                      <a class="nav-link"  href="/user-payments">Payments</a>
+                                    </li>
+                                  </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <% if(page === 'Profile') { %>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="media  p-3">
+                                                <img src="/public/assets/images/avatar.png" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:30px;">
+                                                <div class="media-body">
+                                                    <!-- <h4 class="ml-3"><%= user.username %> <small class="small" style="font-size: 14px;">(<%= user.role%>)</small></h4> -->
+                                                    <div class="clearfix">
+                                                        <div class="float-left">
+                                                            <h4 class="text-capitalize"><%=  user.firstName %> <span
+                                                                    class="small">(<%=  user.role %>)</span></h4>
+                                                        </div>
+                                                        <div class="float-right">
+                                                            <button class="btn btn-sm btn-primary update-button mt-2" type="button"
+                                                                class="btn btn-primary" data-toggle="modal"
+                                                                data-target="#myModal">Update</button>
+                                                                
+                                                        </div>
+                                                    </div>
+                                                    <div class="row m-0 p-0">
+                                                        <div class=" col-sm-6 p-0  m-0">
+                                                            <p class="m-0"><b class="font-weight-bolder">First Name:</b> <%= user.firstName %> </p>
+        
+                                                        </div>
+                                                        <div class="col-sm-6 p-0 m-0">
+                                                            <p class="m-0"><b class="font-weight-bolder">Last Name:</b> <%= user.lastName %> </p>  
+                                                        </div>
+                                                        <div class=" col-12 p-0 m-0">
+                                                            <p class="m-0"><b class="font-weight-bolder">Email:</b> <%= user.email %> </p>
+                                                        </div>
+                                                        <div class="col-sm-6 p-0 m-0">
+                                                            <p class="m-0"><b class="font-weight-bolder">Address:</b> <%= user.address %> </p>
+                                                        </div>
+                                                        <div class=" col-sm-6 p-0 m-0">
+                                                            <p class="m-0"><b class="font-weight-bolder">Phone:</b> <%= user.phone %> </p>
+                                                        </div>
+                                                        <div class="col-12 p-0 m-0">
+                                                            <p class="m-0"><b class="font-weight-bolder">Account:</b> <%= user.type %> </p>
+                                                        </div>
+                                                    </div>
+                                                    
+        
+                                                </div>
+                                              </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="col-12 mt-3 mb-2">
+                                    <div class="card ">
+                                        <div class="card-body">
+                                            <h4 class="mt-0 header-title mb-4">Your Stats</h4>
+                                            <% if (user.role === 'Shipper') { %>
+                                            <div class="clearfix mb-3">
+                                                <div class="float-left">
+                                                    Total Jobs Posts
+                                                </div>
+                                                <div class="float-right">
+                                                    <span class="border p-1 pl-2 pr-2  rounded-circle bg-primary"><%= stats ?  stats.JobsPost : 0 %></span>
+                                                </div>
+                                            </div>
+                                            <% } %>
+                                            <div class="clearfix mb-3">
+                                                <div class="float-left">
+                                                    Total Jobs Done
+                                                </div>
+                                                <div class="float-right">
+                                                    <span class="border p-1 pl-2 pr-2  rounded-circle bg-primary"><%= stats ? stats.jobsDone: 0 %></span>
+    
+                                                </div>
+                                            </div>
+    
+                                            <div class="clearfix mb-3">
+                                                <div class="float-left">
+                                                    Jobs In Progress
+                                                </div>
+                                                <div class="float-right">
+                                                    <span class="border p-1 pl-2 pr-2  rounded-circle bg-primary"><%= stats ?  stats.jobsInProgress: 0 %></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } else if (page === 'Fleet') {%>
+                            Fleet
+                        <%} else if (page === 'Payments') { %>
+                            Payments
+                        <% } %>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="/public/assets/js/update-shipper.js"></script>
+<script src="/public/assets/js/profile/update-carrier-profile.js"></script>
+<script src="/public/assets/js/profile/update-carrier-fleet.js"></script>
+
+
+
+<link rel="stylesheet" href="/public/assets/css/profile.css">
+<link rel="stylesheet" href="/public/plugins/datatables/datatable.css">
+<script src="/public/plugins/datatables/datatable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.scrollto/2.1.2/jquery.scrollTo.min.js"></script>
+<script src="/public/assets/js/post-jobs.js"></script>
+
+<script>
+    jQuery(() => {
+
+        let type = "<%= user ? user.type : '' %>"
+        window.onresize = function () {
+           let  width = window.innerWidth;
+            if(width > 991) {
+                $('.sidebar').addClass('flex-column')
+            } else {
+                $('.sidebar').removeClass('flex-column')
+
+            }
+        }
+
+        $('#type').val(type);
+        
+    })
+</script>
+
+<% include ../Partials/FooterLink  %>
+<% include ../Partials/Footer %>
+<% include ../Partials/FooterRoot  %>

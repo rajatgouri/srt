@@ -1,0 +1,41 @@
+<% include ../../Partials/HeaderRoot  %>
+<% include ../../Partials/Header %>
+
+<div class="wrapper-signup-page">
+    <% include ../loder %>
+    <div class="card  account-card mx-3 border shadow-lg">
+        <div class="bg-primary p-4 text-white text-center position-relative">
+            <h4 class="font-20 text-dark m-b-5">Register as Carrier!</h4>
+            <p class="text-dark mb-4">Sign up to continue to Truck Loads.</p>
+            <a class="logo logo-admin"><img src="/public/assets/images/logo-sm.svg" height="26" alt="logo"></a>
+        </div>
+        <div class="mt-5 p-3">
+                <!-- progressbar -->
+                <ul id="progressbar">
+                    <li class="<%= page === 'Profile' ? 'active' : '' %>">Profile</li>
+                    <li class="<%= page === 'card' ? 'active' : '' %>">Card Details</li>
+                   
+                </ul>
+                <!-- fieldsets -->
+
+                <% if (page === 'Profile') { %>
+                    <% include ../../Forms/shipper_profile %>
+                <% } else if (page === 'card') {%>
+                    <% include ../../Forms/card_details %>
+                    
+                <% } %>
+        </div>
+    </div>
+</div>
+
+
+<% include ../../Partials/FooterLink  %>
+<% include ../../Partials/Footer  %>
+
+<% include ../../Partials/FooterRoot  %>
+
+
+
+<link rel="stylesheet" href="/public/assets/css/register.css">
+<script src="/public/assets/js/shipperSignup.js"></script>
+<script src="/public//assets/js/card.js"></script>

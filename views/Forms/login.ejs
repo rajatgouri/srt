@@ -1,0 +1,42 @@
+
+<form class="form-horizontal m-t-30" id="login-form" >
+
+    <div class="form-group">
+        <label for="username"  class="small font-weight-bolder">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter Email"  required>
+    </div>
+
+    <div class="form-group mt-2">
+        <label for="password"  class="small font-weight-bolder">password</label>
+        <input type="password" class="form-control" id="password" placeholder="Enter password" required>
+    </div>
+
+    <div class="form-group mt-2">
+        <label for="role"  class="small font-weight-bolder">Who Are You?</label>
+        <select id="role" name="role" class="custom-select" style="height: 35px;" required>
+            <option value="Carrier">Carrier</option>
+            <option value="Shipper">Shipper</option>
+        </select>
+    </div>
+
+    
+
+    <div class="form-group row mt-2">
+        <div class="col-sm-6">
+            <div class="custom-control custom-checkbox mt-3">
+                <input type="checkbox" class="custom-control-input" id="remember" name="remember">
+                <label class="custom-control-label" for="remember">Remember me</label>
+            </div>
+            
+        </div>
+        <div class="col-sm-6 text-right">
+            <button class="btn btn-primary w-md waves-effect waves-light mt-4 login-button" type="submit">Log In</button>
+        </div>
+    </div>
+
+    <div class="form-group m-t-10 mb-0 row">
+        <div class="col-12 m-t-20">
+            <a href="/forget-password"><i class="mdi mdi-lock"></i> Forgot your password?</a>
+        </div>
+    </div>
+</form>
